@@ -1,8 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
+import {getPopularMovies} from './services/services';
 
 const App = () => {
-  console.log('hola');
+  const [movies, setMovies] = useState('');
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    getPopularMovies()
+      .then(movies => {
+        setMovies(movies);
+      })
+      .catch(err => {
+        console.log(err);
+        setError(err);
+      });
+  }, []);
+
   return (
     <View
       style={{
@@ -10,7 +24,8 @@ const App = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text>Hello, world!</Text>
+      {error && <Text style={{color: 'red'}}>error</Text>}
+      <Text>{movies && movies.map(m => m.original_title)}</Text>
     </View>
   );
 };
