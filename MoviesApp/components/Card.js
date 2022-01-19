@@ -7,10 +7,12 @@ const placeholderImage = require('../assets/images/poster-placeholder.png');
 const propTypes = {
   item: PropTypes.object,
 };
-const Card = ({item}) => {
+const Card = ({navigation, item}) => {
   const prefix = 'https://image.tmdb.org/t/p/w500';
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate('Detail', {movieId: item.id})}>
       <Image
         resizeMode="cover"
         style={styles.image}

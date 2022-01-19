@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   title: PropTypes.object,
-  content: PropTypes.object,
+  content: PropTypes.array,
 };
-const List = ({title, content}) => {
+const List = ({navigation, title, content}) => {
   return (
     <View style={styles.list}>
       <View>
@@ -16,7 +16,7 @@ const List = ({title, content}) => {
       <View>
         <FlatList
           data={content}
-          renderItem={({item}) => <Card item={item} />}
+          renderItem={({item}) => <Card navigation={navigation} item={item} />}
           horizontal={true}></FlatList>
       </View>
     </View>
