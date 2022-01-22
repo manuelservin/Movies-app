@@ -1,11 +1,12 @@
 import React from 'react';
 import {Pressable, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Colors from '../Theme/Colors';
 const Play = ({handlePress}) => {
   return (
     <>
       <Pressable onPress={() => handlePress()} style={styles.button}>
-        <Icon name={'caret-forward-outline'} size={30} color={'#fff'} />
+        <Icon name={'caret-forward-outline'} size={30} color={Colors.white} />
       </Pressable>
     </>
   );
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: 50,
     padding: 10,
-    backgroundColor: '#4481FC',
+    backgroundColor: Colors.primary,
   },
 });
 

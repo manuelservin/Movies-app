@@ -34,5 +34,15 @@ allprojects {
 
         google()
         maven { url 'https://www.jitpack.io' }
+        jcenter() {
+            content {
+                includeModule("com.yqritc", "android-scalablevideoview")
+            }
+        }
     }
+   
 }
+
+configurations.all {   
+    resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
+} 

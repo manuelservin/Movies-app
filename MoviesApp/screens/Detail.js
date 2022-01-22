@@ -9,12 +9,13 @@ import {
   View,
   Modal,
 } from 'react-native';
-
+import VideoPlayer from 'react-native-video-controls';
 import {getMovieDetail} from '../services/services';
 import Error from '../components/Error';
 import StarRating from 'react-native-star-rating';
 import dateFormat from 'dateformat';
 import Play from '../components/Play';
+import Video from '../components/Video';
 
 const height = Dimensions.get('screen').height;
 
@@ -25,6 +26,10 @@ const Detail = ({route, navigation}) => {
   const [error, setError] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const prefix = 'https://image.tmdb.org/t/p/w500';
+  const videoShown = () => {
+    setModalVisible(!modalVisible);
+  };
+
   useEffect(() => {
     getMovieDetail(movieId)
       .then(movie => {
@@ -33,6 +38,7 @@ const Detail = ({route, navigation}) => {
       })
       .catch(err => setError(err));
   }, []);
+
   return (
     <>
       {loaded && !error && (
@@ -75,7 +81,12 @@ const Detail = ({route, navigation}) => {
               </Text>
             </View>
           </ScrollView>
-          <Modal animationType="slide" visible={modalVisible}></Modal>
+          <Modal
+            supportedOrientations={['portrait', 'landscape']}
+            animationType="slide"
+            visible={modalVisible}>
+            <Video handleClose={videoShown} />
+          </Modal>
         </>
       )}
       {!loaded && <ActivityIndicator size="large" />}
